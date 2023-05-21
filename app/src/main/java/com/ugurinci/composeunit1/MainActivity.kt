@@ -10,7 +10,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -18,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,6 +50,7 @@ class MainActivity : ComponentActivity() {
                     /*Article()*/
                     /*TaskManager()*/
                     QuadrantApp()
+                    BusinessCard()
                 }
             }
         }
@@ -118,10 +128,6 @@ fun Article() {
 
 @Composable
 fun TaskManager() {
-    /*
-    *verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    * */
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -198,6 +204,67 @@ fun QuadrantApp() {
     }
 }
 
+@Composable
+fun BusinessCard() {
+    Box(modifier = Modifier.background(Color(0xFFd2e7d4))) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 96.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.android_logo),
+                contentDescription = null,
+                modifier = Modifier
+                    .height(128.dp)
+                    .width(128.dp)
+                    .background(Color(0xFF073042))
+            )
+            Text(
+                text = "Jennifer Doe",
+                fontSize = 48.sp,
+                fontWeight = FontWeight.Light,
+            )
+            Text(
+                text = "Android Developer Extraordinaire",
+                color = Color(0xFF0f6439),
+                fontWeight = FontWeight.Bold,
+            )
+        }
+        Column(
+            verticalArrangement = Arrangement.Bottom,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 32.dp)
+        ) {
+            Contact(Icons.Default.Phone, "+11 (123) 444 555 666")
+            Contact(Icons.Default.Share, "@AndroidDev")
+            Contact(Icons.Default.Email, "jen.doe@android.com")
+        }
+    }
+}
+
+@Composable
+fun Contact(imageVector: ImageVector, info: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 80.dp),
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = null,
+            tint = Color(0xFF0f6439)
+        )
+        Text(
+            text = info,
+            modifier = Modifier.padding(start = 32.dp, bottom = 12.dp)
+        )
+    }
+}
+
 /*
 @Preview(showBackground = true)
 @Composable
@@ -233,7 +300,7 @@ fun TaskManagerPreview() {
     }
 }*/
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun QuadrantAppPreview() {
     ComposeUnit1Theme {
@@ -241,6 +308,18 @@ fun QuadrantAppPreview() {
             modifier = Modifier.fillMaxSize(),
         ) {
             QuadrantApp()
+        }
+    }
+}*/
+
+@Preview(showBackground = true)
+@Composable
+fun BusinessCardPreview() {
+    ComposeUnit1Theme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            BusinessCard()
         }
     }
 }
